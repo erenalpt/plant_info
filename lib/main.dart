@@ -5,13 +5,12 @@ import 'package:trees_info/plantListDetail.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  get index => PlantList();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Plant Information",
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),

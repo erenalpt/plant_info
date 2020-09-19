@@ -23,5 +23,7 @@ class Plant {
   }
 
   String get picture => _picture;
-  set picture(String value) => _picture = value;
+  set picture(String value) {
+    _picture = value;
+  }
 }

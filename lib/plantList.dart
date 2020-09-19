@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trees_info/utils/string.dart';
-import 'models/plant.dart';
+import 'package:trees_info/models/plant.dart';
 
 class PlantList extends StatelessWidget {
   static List<Plant> allPlant;
@@ -10,6 +10,7 @@ class PlantList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Plant List"),
+        automaticallyImplyLeading: false,
       ),
       body: plantListWidget(),
     );
@@ -19,7 +20,7 @@ class PlantList extends StatelessWidget {
     List<Plant> plants = [];
 
     for (var i = 0; i < 3; i++) {
-      String pict = Strings.PlantName[i] + ".jpg";
+      String pict = Strings.PlantName[i].toLowerCase() + ".jpg";
       String plntName = Strings.PlantName[i];
       String plntLatin = Strings.LatinceAd[i];
       String plntFeatures = Strings.PlantFeatures[i];
@@ -32,7 +33,9 @@ class PlantList extends StatelessWidget {
 
   Widget plantListWidget() {
     return ListView.builder(
-      itemBuilder: (context, index) => singlePlant(context, index),
+      itemBuilder: (context, index) {
+        return singlePlant(context, index);
+      },
       itemCount: allPlant.length,
     );
   }
@@ -46,7 +49,6 @@ class PlantList extends StatelessWidget {
         child: ListTile(
           onTap: () => Navigator.pushNamed(context, "/plantListDetails/$index"),
           leading: CircleAvatar(
-            backgroundColor: Colors.transparent,
             backgroundImage: AssetImage(
               "images/${addingPlant.picture.toLowerCase()}",
             ),
@@ -63,9 +65,9 @@ class PlantList extends StatelessWidget {
             child: Text(
               addingPlant.plantLatinceName,
               style: TextStyle(
-                  fontSize: 13.5,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.green.shade300),
+                fontSize: 13,
+                color: Colors.green.shade300,
+              ),
             ),
           ),
           trailing: Icon(

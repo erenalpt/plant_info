@@ -28,11 +28,15 @@ class PlantDetailsState extends State<PlantDetails> {
 
   void vibrateColorFind() {
     Future<PaletteGenerator> futureGener = PaletteGenerator.fromImageProvider(
-        AssetImage("images/" + selectedPlant.picture.toLowerCase()));
+      AssetImage(
+        "images/" + selectedPlant.picture.toLowerCase(),
+      ),
+    );
 
     futureGener.then((value) {
       paletteGenerator = value;
-      //debugPrint("Seçilen vibra" + paletteGenerator.vibrantColor.toString());
+      // debugPrint(
+      //     "Seçilen vibra" + paletteGenerator.darkVibrantColor.toString());
 
       setState(() {
         vibrateColor = paletteGenerator.vibrantColor.color;
@@ -43,12 +47,12 @@ class PlantDetailsState extends State<PlantDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      primary: true,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             expandedHeight: 250,
             pinned: true,
-            primary: true,
             backgroundColor:
                 vibrateColor != null ? vibrateColor : Colors.green.shade600,
             flexibleSpace: FlexibleSpaceBar(
@@ -58,7 +62,7 @@ class PlantDetailsState extends State<PlantDetails> {
               ),
               centerTitle: true,
               title: Text(
-                "Plant: " + selectedPlant.plantName,
+                selectedPlant.plantLatinceName,
                 style: TextStyle(fontSize: 16),
               ),
             ),
@@ -67,6 +71,10 @@ class PlantDetailsState extends State<PlantDetails> {
             child: Container(
               margin: EdgeInsets.all(8),
               padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
               child: SingleChildScrollView(
                 child: Text(
                   selectedPlant.description,
